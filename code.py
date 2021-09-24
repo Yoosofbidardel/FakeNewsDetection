@@ -21,11 +21,11 @@ labels = df.label
 #again head() will print first 5 labels
 labels.head()
 
-Name: label, dtype: object
-In [0]:
+
+
 #Split the dataset into train and test sets
 x_train,x_test,y_train,y_test=train_test_split(df['text'], labels, test_size=0.2, random_state=7)
-In [0]:
+
 '''
 Initialize a TfidfVectorizer
 TF (Term Frequency): The number of times a word appears in a document is its Term Frequency. 
@@ -39,7 +39,7 @@ tfidf_vectorizer=TfidfVectorizer(stop_words='english', max_df=0.7)
 
 tfidf_train=tfidf_vectorizer.fit_transform(x_train) 
 tfidf_test=tfidf_vectorizer.transform(x_test)
-In [0]:
+
 '''
 Passive Aggressive algorithms are online learning algorithms. 
 Such an algorithm remains passive for a correct classification outcome, and turns aggressive in the event of a miscalculation,
@@ -51,14 +51,9 @@ pac.fit(tfidf_train,y_train)
 y_pred = pac.predict(tfidf_test)
 score = accuracy_score(y_test,y_pred)
 print(f'Accuracy: {round(score*100,2)}%')
-Accuracy: 91.26%
-In [0]:
+
 #Build Confusion Matrix
 confusion_matrix(y_test,y_pred, labels=['FAKE','REAL'])
-Out[0]:
-array([[96,  7],
-       [11, 92]])
-In [0]:
 '''
 So with this model, we have 96 true positives, 92 true negatives, 7 false positives, and 11 false negatives.
 '''
